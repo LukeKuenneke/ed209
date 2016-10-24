@@ -58,6 +58,16 @@ class Ed209
     system(command)
   end
 
+  def push(project)
+    command = 'cd ' + + '; `git push https://' + @github_username + ':' +
+              Shellwords.escape(@github_password) + '@' +
+              project[:html_url].gsub('https://', '') + '.git`'
+    system(command)
+  end
+
+  # def create_pr(project)
+  # end
+
   def process_projects
     @ruby_project_urls.each do |project|
       # Fork
@@ -73,7 +83,7 @@ class Ed209
       commit(forked_project)
 
       # Push
-      # push(forked_project)
+      push(forked_project)
 
       # Create PR
       # create_pr(forked_project)

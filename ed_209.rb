@@ -38,13 +38,19 @@ class Ed209
     @github_auth.fork(project[:full_name])
   end
 
+  def clone_local(project)
+    command = 'cd ' + WORKING_DIR + '; mkdir ed209; cd ed209; git clone ' +
+              project[:clone_url]
+    system(command)
+  end
+
   def process_projects
     @ruby_project_urls.each do |project|
       # Fork
       forked_project = fork_project(project)
 
       # Clone
-      # clone_local(forked_project)
+      clone_local(forked_project)
 
       # Rubocop
       # run_rubocop(forked_project)

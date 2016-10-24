@@ -49,6 +49,15 @@ class Ed209
     system(command)
   end
 
+  def commit(project)
+    command = 'cd ' + WORKING_DIR + 'ed209/' + project[:name] +
+              '; git commit -a --author=\'' + @github_auth.user[:name] +
+              ' <' + @github_auth.user[:email] +
+              '>\' -m \'Rubocop auto-correct ed209: ' \
+              'https://github.com/LukeKuenneke/ed209\''
+    system(command)
+  end
+
   def process_projects
     @ruby_project_urls.each do |project|
       # Fork
@@ -61,7 +70,7 @@ class Ed209
       run_rubocop(forked_project)
 
       # Commit
-      # commit(forked_project)
+      commit(forked_project)
 
       # Push
       # push(forked_project)

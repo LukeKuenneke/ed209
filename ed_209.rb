@@ -44,6 +44,11 @@ class Ed209
     system(command)
   end
 
+  def run_rubocop(project)
+    command = 'cd ' + WORKING_DIR + 'ed209/' + project[:name] + '&& rubocop -a'
+    system(command)
+  end
+
   def process_projects
     @ruby_project_urls.each do |project|
       # Fork
@@ -53,7 +58,7 @@ class Ed209
       clone_local(forked_project)
 
       # Rubocop
-      # run_rubocop(forked_project)
+      run_rubocop(forked_project)
 
       # Commit
       # commit(forked_project)

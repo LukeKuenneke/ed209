@@ -34,10 +34,14 @@ class Ed209
     end
   end
 
+  def fork_project(project)
+    @github_auth.fork(project[:full_name])
+  end
+
   def process_projects
     @ruby_project_urls.each do |project|
       # Fork
-      # forked_project = fork_project(project)
+      forked_project = fork_project(project)
 
       # Clone
       # clone_local(forked_project)

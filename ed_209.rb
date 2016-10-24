@@ -68,6 +68,10 @@ class Ed209
   # def create_pr(project)
   # end
 
+  def delete_local_code(project)
+    exec('rm -rf ' + WORKING_DIR + 'ed209/' + project[:name])
+  end
+
   def process_projects
     @ruby_project_urls.each do |project|
       # Fork
@@ -89,7 +93,7 @@ class Ed209
       # create_pr(forked_project)
 
       # Delete
-      # delete_local_code(forked_project)
+      delete_local_code(forked_project)
     end
   end
 

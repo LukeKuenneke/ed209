@@ -26,7 +26,7 @@ class Ed209
   def ruby_project_urls
     HTTParty.get('https://api.github.com/search/repositories?q=+language:ruby' \
     '&sort=stars&order=asc').parsed_response['items'].each do |item|
-      @ruby_project_urls = [] unless @ruby_project_urls
+      @ruby_project_urls ||= []
       @ruby_project_urls << {
         url: item['html_url'],
         full_name: item['full_name']
